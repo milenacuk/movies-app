@@ -15,6 +15,9 @@ const router = new VueRouter({
   mode: 'history',
   routes
 })
+
+window.EventHub = new Vue();
+
 new Vue({
   
   router,

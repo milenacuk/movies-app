@@ -14,7 +14,7 @@
             </thead>
             <tbody>
                                     
-                    <MovieRow v-for='movie in movies' :key='movie.id' :movie="movie"/>
+                    <MovieRow v-for='movie in filteredMovies' :key='movie.id' :movie="movie"/>
                 
                 </tbody>
         </table>
@@ -29,7 +29,8 @@ import MovieRow from './MovieRow.vue'
 export default {
     data(){
         return{
-            movies:[]
+            movies:[],
+            term: ''
         }
     },
     beforeRouteEnter(to,from,next){
@@ -42,6 +43,17 @@ export default {
     },
     components: {
         MovieRow
+    },
+    computed: {
+        filteredMovies(){           
+            return this.movies.filter(movie => {
+                return movie.title.toLowerCase().includes(this.term.toLowerCase())});
+        }
+    },
+    created (){
+        window.EventHub.$on('search', (term)=> {
+            this.term = term;
+        })
     }
 }
 </script>
