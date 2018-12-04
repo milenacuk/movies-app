@@ -1,32 +1,30 @@
 <template>
     <div>
-        <table border='1'>
+        <br>        
+         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Title</th>
-                    <th>Director</th>
-                    <th>ImageUrl</th>
-                    <th>Duration</th>
-                    <th>Relase Data</th>
-                    <th>Genre</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Director</th>
+                    <th scope="col">ImageUrl</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Relase Data</th>
+                    <th scope="col">Genre</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for='movie in movies' :key='movie.id'>
-                    <td>{{ movie.title }}</td>
-                    <td>{{ movie.director }}</td>
-                    <td>{{ movie.imageUrl }}</td>
-                    <td>{{ movie.duration }}</td>
-                    <td>{{ movie.relaseData }}</td>
-                    <td>{{movie.genre }}</td>
-                </tr>
-            </tbody>
+                                    
+                    <MovieRow v-for='movie in movies' :key='movie.id' :movie="movie"/>
+                
+                </tbody>
         </table>
+            
     </div>
 </template>
 
 <script>
 import { movies } from '../services/Movies.js'
+import MovieRow from './MovieRow.vue'
 
 export default {
     data(){
@@ -34,12 +32,16 @@ export default {
             movies:[]
         }
     },
-    created(){
-        movies.get().then(response => {
-            this.movies = response.data;
-        }).catch(error => {
-            console.log(error.response);
+    beforeRouteEnter(to,from,next){
+        movies.getAll().then(response => {
+            next(vm => {
+                vm.movies = response.data;
+            })         
         })
+        
+    },
+    components: {
+        MovieRow
     }
 }
 </script>

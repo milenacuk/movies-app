@@ -7,5 +7,8 @@ export default class Movies{
     getAll(){
         return axios.get('movies');
     }
+    showMovie(){
+        return axios.get(`movies/${id}`);
+    }
 }
 export const movies = new Movies();
