@@ -11,7 +11,7 @@
                 </tr>
             </thead>
             <tbody> -->
-                <tr>
+                <tr :class="{ 'selectedMovieBackground' : isSelected }">                  
                     <td>{{ movie.title }}</td>
                     <td>{{ movie.director }}</td>                   
                     <td>
@@ -20,6 +20,7 @@
                     <td>{{ movie.duration }}</td>
                     <td>{{ movie.relaseData }}</td>
                     <td>{{ movie.genre }}</td>
+                    <td><button  class="btn btn-info" @click='selectMovie'>Select</button></td>               
                     
                 </tr>
             <!-- </tbody>
@@ -30,6 +31,37 @@
 
 <script>
 export default {
-    props: ['movie']
+    props:{
+        //  ['movie'],
+        movie: { 
+            type: Object
+            }
+    },
+    data(){
+        return{
+            isSelected: false
+        }
+    },
+    methods: {
+        selectMovie(){
+            if(!this.isSelected){
+                 this.isSelected = true;
+                 this.$emit("selected");
+            }
+            else{
+                this.isSelected = false;
+                this.$emit('unselected');
+            }
+        }
+    }
 }
 </script>
+
+<style>
+.selectedMovieBackground {
+    background-color:chocolate;
+}
+/* tr {
+    border-color:blue;
+} */
+</style>
