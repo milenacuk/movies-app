@@ -1,9 +1,15 @@
 <template>
     <div>
-        <br>        
+        <br>  
+        <p v-if="numberSelectedMovies"> Selected Movies: {{numberSelectedMovies}}</p>    
+        <div class="btns">                    
+            <button class="btn btn-info" @click="selectAll">Select all movies</button>
+            <button class="btn btn-dark" @click="deselectAll">Deselect movies</button>
+        </div>  
+        <br>
          <table class="table table-striped">
             <thead>
-                <tr>
+                <tr>                   
                     <th scope="col">Title</th>
                     <th scope="col">Director</th>
                     <th scope="col">ImageUrl</th>
@@ -14,22 +20,16 @@
                 </tr>
             </thead>
             <tbody>                                 
-                <!-- <template v-if="filteredMovies.length"> -->
-                    <p v-if="numberSelectedMovies"> Selected Movies: {{numberSelectedMovies}}</p>
-                    <!-- <button class="btn btn-info" @click="selectAll">Select all movies</button>
-                    <button class="btn btn-dark" @click="deselectAll">Deselect movies</button> -->
-
-                        <!-- <p class="num-of-selected-movies">Selected Movies: {{numberSelectedMovies}}</p> -->
-                    <!-- </template> -->
+                <!-- <template v-if="filteredMovies.length"> -->                                                          
+                <!-- </template> -->
+                
                 <MovieRow v-for='movie in filteredMovies' :key='movie.id' 
-                        :movie="movie" @selected="movieSelected" @unselected="movieUnselected"/>
+                        :movie="movie" @selected="movieSelected" @unselected="movieUnselected"
+                        />
                 <!-- </template> -->
                 <template v-if="!filteredMovies.length">
                      <center> <h3>Movie is not in base!</h3></center>
-                </template>
-
-                    
-                
+                </template>                                    
                 </tbody>
         </table>
             
@@ -46,7 +46,7 @@ export default {
             movies:[],
             term: '',
             numberSelectedMovies: 0,
-            // selected: false
+             
         }
     },
     beforeRouteEnter(to,from,next){
@@ -76,17 +76,30 @@ export default {
             this.numberSelectedMovies++;
         },
         movieUnselected(){
+            if(!this.numberSelectedMovies < 0)
             this.numberSelectedMovies--;
         
-        // },
-        // selectAll(){
+        },
+        selectAll(){
             
-        // },
-        // deselectAll(){
-        //     this.numberSelectedMovies;
+            this.numberSelectedMovies =  this.movies.length;
+
+        },
+        deselectAll(){
+            
+            this.numberSelectedMovies = 0;
             
         }
 
     }
 }
 </script>
+
+<style>
+.btns {
+        display: flex;
+        justify-content: space-around;
+        margin: 1rem auto;
+        max-width: 300px;
+    }
+</style>

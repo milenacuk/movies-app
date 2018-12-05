@@ -39,7 +39,8 @@ export default {
     },
     data(){
         return{
-            isSelected: false
+            isSelected: false,
+            
         }
     },
     methods: {
@@ -58,9 +59,9 @@ export default {
 </script>
 
 <style>
-.selectedMovieBackground {
+/* .selectedMovieBackground {
     background-color:chocolate;
-}
+} */
 /* tr {
     border-color:blue;
 } */
