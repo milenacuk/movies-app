@@ -20,12 +20,12 @@
                 </tr>
             </thead>
             <tbody>
-                   <template v-if = "!filteredMovies.length">
+                   <!-- <template v-if = "!filteredMovies.length">
                        <h3>Trazeni film nije u bazi!</h3>                      
                    </template > 
                    <template v-else>
                         <MovieRow v-for='movie in filteredMovies' :key='movie.id' :movie="movie"/>
-                   </template>                
+                   </template>                 -->
                     
                 
                 <MovieRow v-for='movie in filteredMovies' :key='movie.id' 
@@ -81,7 +81,7 @@ export default {
             this.numberSelectedMovies++;
         },
         movieUnselected(){
-            if(!this.numberSelectedMovies < 0)
+            if(this.numberSelectedMovies > 0)
             this.numberSelectedMovies--;
         
         },

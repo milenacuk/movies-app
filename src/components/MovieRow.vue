@@ -58,10 +58,10 @@ export default {
 }
 </script>
 
-<style>
-/* .selectedMovieBackground {
-    background-color:chocolate;
-} */
+<style scoped>
+.selectedMovieBackground {
+    background-color:chocolate !important;
+}
 /* tr {
     border-color:blue;
 } */
