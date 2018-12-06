@@ -13,12 +13,12 @@
                 </tr>
             </thead>
             <tbody>
-                   <div v-if = "!filteredMovies.length">
+                   <template v-if = "!filteredMovies.length">
                        <h3>Trazeni film nije u bazi!</h3>                      
-                   </div > 
-                   <div v-else>
-                       <MovieRow v-for='movie in filteredMovies' :key='movie.id' :movie="movie"/>
-                   </div>                
+                   </template > 
+                   <template v-else>
+                        <MovieRow v-for='movie in filteredMovies' :key='movie.id' :movie="movie"/>
+                   </template>                
                     
                 
                 </tbody>
